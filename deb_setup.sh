@@ -22,7 +22,7 @@ adduser $someone sudo
 mkdir -p /home/$someone/.ssh && cp /root/.ssh/authorized_keys /home/$someone/.ssh/authorized_keys
 
 #Disable root login via ssh by modifying the sshd_config
-sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+sed -i 's/PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 
 #Make sure the user owns the contents of their key file
 chown -R $someone:$someone /home/$someone/.ssh/* && chmod -R 0600 /home/$someone/.ssh/*
