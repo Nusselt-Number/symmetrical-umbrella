@@ -1,8 +1,26 @@
 #!/bin/bash
 #This script is for first time set up of a new droplet on digital ocean.  But it should work for most debian based distros.
-#It requires a single $1 parameters when the script is called. 
-#This is the name of an existing user who will become the sudo and ssh access point user, while disabling root logon.
+#It requires a single $1 parameters when the script is called that will be the sudo user's name and will disable root login.
 #This script is intended to be run as root or prefixed with sudo, it does not include any sudos in it at this time.
+
+#Reassign user argument to a variable.
+someone="$1"
+
+#Check if the name provided is valid.
+if [ someone != "" ]; then
+    echo 'username: $someone is good'
+else
+    echo 'need to enter a username!'
+    exit 5
+fi
+    
+
+#Create the user, will prompt the user for a password and other information.
+adduser $someone
+
+#Add the user to the sudo group.
+adduser $someone sudo
+
 
 #Check to make sure the name provided exists
 if id "$1" &>/dev/null; then
@@ -11,12 +29,6 @@ else
     echo 'user not found'
     exit 5
 fi
-
-#Reassign user argument to a variable.
-someone="$1"
-
-#Add the user to the sudo group.
-adduser $someone sudo
 
 #Copy the keys from root login to our new sudoheck what distro I'm on user's key file.
 mkdir -p /home/$someone/.ssh && cp /root/.ssh/authorized_keys /home/$someone/.ssh/authorized_keys
@@ -38,6 +50,13 @@ ufw default deny incoming
 ufw default allow outgoing
 ufw limit ssh
 
-#Lastly enable the firewall and then reload
+#Enable the firewall and reload the firewall plus ssh service
 ufw enable
 ufw reload
+systemctl restart ssh
+
+#Run a system update & upgrade
+apt update && apt upgrade -y
+
+#Logout of the system when done.
+logout
