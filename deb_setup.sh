@@ -4,13 +4,21 @@
 #This is the name of an existing user who will become the sudo and ssh access point user, while disabling root logon.
 #This script is intended to be run as root or prefixed with sudo, it does not include any sudos in it at this time.
 
+#Check to make sure the name provided exists
+if id "$1" &>/dev/null; then
+    echo 'user found'
+else
+    echo 'user not found'
+    exit 5
+fi
+
 #Reassign user argument to a variable.
 someone="$1"
 
 #Add the user to the sudo group.
 adduser $someone sudo
 
-#Copy the keys from root login to our new sudo user's key file.
+#Copy the keys from root login to our new sudoheck what distro I'm on user's key file.
 mkdir -p /home/$someone/.ssh && cp /root/.ssh/authorized_keys /home/$someone/.ssh/authorized_keys
 
 #Disable root login via ssh by modifying the sshd_config
