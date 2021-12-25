@@ -3,7 +3,7 @@
 
 #Install steamcmd and dependencies, then forward the correct port.
 apt update
-apt install steamcmd xvfb wine-stable lib32gcc1
+apt install steamcmd xvfb wine-stable lib32gcc1 tmux
 ufw allow 27015/udp
 
 #Next we can install the ROR2 dedicated server via the following 'automated' command
