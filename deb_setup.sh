@@ -9,9 +9,9 @@ someone="$1"
 
 #Check if the name provided is valid.
 if [ someone != "" ]; then
-    echo 'username: "$someone" is good'
+    echo "The username: $someone is good"
 else
-    echo 'need to enter a username!'
+    echo "Need to enter a username, exiting!"
     exit 5
 fi
     
@@ -25,9 +25,9 @@ adduser $someone sudo
 
 #Check to make sure the name provided exists
 if id "$1" &>/dev/null; then
-    echo 'user found'
+    echo "User: $someone found"
 else
-    echo 'user not found'
+    echo "User: $someone not found, exiting!"
     exit 5
 fi
 
@@ -55,9 +55,6 @@ ufw limit ssh
 echo "y" | ufw enable
 systemctl restart ssh
 
-#Run a system update & upgrade
-apt-get update -y && apt-get upgrade -y
-
 #Display end result
-echo 'username: "$someone" created'
-echo 'setup script finished!'
+echo "User: "$someone" created"
+echo "setup script finished!"
