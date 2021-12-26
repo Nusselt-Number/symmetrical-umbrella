@@ -2,6 +2,7 @@
 #This script is for first time set up of a new droplet on digital ocean.  But it should work for most debian based distros.
 #It requires a single $1 parameters when the script is called that will be the sudo user's name and will disable root login.
 #This script is intended to be run as root or prefixed with sudo, it does not include any sudos in it at this time.
+#For example, you would run the script as "$ bash deb_setup.sh jack" to create a user named jack as root.
 
 #Reassign user argument to a variable.
 someone="$1"
@@ -42,8 +43,8 @@ chown -R $someone:$someone /home/$someone/.ssh/* && chmod -R 0600 /home/$someone
 ###Install and setup the firewall
 
 #First check for updates, then install
-apt update
-apt install ufw
+apt update -qq
+apt install -qq ufw
 
 #Next setup our default rules
 ufw default deny incoming
@@ -56,7 +57,4 @@ ufw reload
 systemctl restart ssh
 
 #Run a system update & upgrade
-apt update && apt upgrade -y
-
-#Logout of the system when done.
-logout
+apt update -qq && apt upgrade -qq
