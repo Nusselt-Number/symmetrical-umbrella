@@ -43,8 +43,8 @@ chown -R $someone:$someone /home/$someone/.ssh/* && chmod -R 0600 /home/$someone
 ###Install and setup the firewall
 
 #First check for updates, then install
-apt update -qq
-apt install -qq ufw
+apt-get update -y
+apt-get install -y ufw
 
 #Next setup our default rules
 ufw default deny incoming
@@ -52,9 +52,12 @@ ufw default allow outgoing
 ufw limit ssh
 
 #Enable the firewall and reload the firewall plus ssh service
-ufw enable
-ufw reload
+echo "y" | ufw enable
 systemctl restart ssh
 
 #Run a system update & upgrade
-apt update -qq && apt upgrade -qq
+apt-get update -y && apt-get -y
+
+#Display end result
+echo 'username: $someone created'
+echo 'setup script finished!'

@@ -2,8 +2,8 @@
 #This script installs the Risk of Rain 2 dedicated server via SteamCMD alongside necessary dependencies.  It also opens ports for the game, 27015/udp, via ufw
 
 #Install steamcmd and dependencies, then forward the correct port.
-sudo apt update
-sudo apt install steamcmd xvfb wine lib32gcc-s1 tmux
+sudo apt-get update
+sudo apt-get install -y steamcmd xvfb wine lib32gcc-s1 tmux
 sudo ufw allow 27015/udp
 
 #Next we can install the ROR2 dedicated server via the following 'automated' command

@@ -5,4 +5,4 @@
 sudo sed -i 's/main/main contrib non-free/' /etc/apt/sources.list
 
 #Update and upgrade apt lists
-sudo apt update -qq && sudo apt upgrade -qq
+sudo apt-get update -y && sudo apt-get upgrade -y
