@@ -9,7 +9,7 @@ someone="$1"
 
 #Check if the name provided is valid.
 if [ someone != "" ]; then
-    echo 'username: $someone is good'
+    echo 'username: "$someone" is good'
 else
     echo 'need to enter a username!'
     exit 5
@@ -56,8 +56,8 @@ echo "y" | ufw enable
 systemctl restart ssh
 
 #Run a system update & upgrade
-apt-get update -y && apt-get -y
+apt-get update -y && apt-get upgrade -y
 
 #Display end result
-echo 'username: $someone created'
+echo 'username: "$someone" created'
 echo 'setup script finished!'
