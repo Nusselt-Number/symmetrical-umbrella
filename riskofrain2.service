@@ -1,0 +1,12 @@
+[Unit]
+Description=Risk of Rain 2 Dedicated Server
+After=network.target
+
+[Service]
+ExecStart=xvfb-run wine /home/steam/"Risk of Rain 2.exe"
+Type=simple
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

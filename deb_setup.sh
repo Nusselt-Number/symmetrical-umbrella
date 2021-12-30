@@ -61,6 +61,3 @@ apt-get update -y && apt-get upgrade -y
 #Display end result
 echo "User: "$someone" created"
 echo "Setup script finished!"
-
-#Reboot when finished to handle updates that require reboot later
-reboot
