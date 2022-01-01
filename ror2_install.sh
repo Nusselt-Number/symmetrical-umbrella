@@ -21,8 +21,8 @@ sudo apt-get update
 sudo apt-get install -y xvfb wine lib32gcc1 
 
 #Before we install steamcmd, need to preemptively accept the EULA/license with the following:
-echo steamcmd steam/license note '' | sudo debconf-set-selections
-echo steamcmd steam/question select 'I AGREE' | sudo debconf-set-selection
+#echo steamcmd steam/license note '' | sudo debconf-set-selections
+#echo steamcmd steam/question select "I AGREE" | sudo debconf-set-selection
 
 sudo apt-get install -y steamcmd
 
@@ -30,5 +30,11 @@ sudo apt-get install -y steamcmd
 steamcmd +login anonymous +force_install_dir /home/steam/ +@sSteamCmdForcePlatformType windows +app_update 1180760 +quit
 steamcmd +login anonymous +force_install_dir /home/steam/ +@sSteamCmdForcePlatformType windows +app_update 1007 +quit
 
-#Can have the server start via
-#xvfb-run wine ./"Risk of Rain 2.exe"
+#Copy the unit file into the etc/systemd/system directory.
+sudo cp -r riskofrain2.service /etc/systemd/system/
+
+#Add the server service with the following:
+sudo systemctl enable riskofrain2.service
+
+#Then start the server:
+sudo systemctl enable riskofrain2.service
