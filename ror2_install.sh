@@ -37,4 +37,4 @@ sudo cp -r riskofrain2.service /etc/systemd/system/
 sudo systemctl enable riskofrain2.service
 
 #Then start the server:
-sudo systemctl enable riskofrain2.service
+sudo systemctl start riskofrain2.service
